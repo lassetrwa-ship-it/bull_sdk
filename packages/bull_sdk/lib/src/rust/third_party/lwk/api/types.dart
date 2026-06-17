@@ -4,6 +4,7 @@
 // ignore_for_file: invalid_use_of_internal_member, unused_import, unnecessary_import
 
 import '../../../frb_generated.dart';
+import '../../boltz/api/types.dart';
 import 'error.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
@@ -100,8 +101,6 @@ class Balance {
           assetId == other.assetId &&
           value == other.value;
 }
-
-enum Network { mainnet, testnet }
 
 class OutPoint {
   final String txid;

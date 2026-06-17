@@ -188,7 +188,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "dbb4e440d04be07da1f1bf44fb4495ebd58669372fe0cffa6e48595ac5bd88a3"
 dependencies = [
  "android_log-sys",
- "env_filter",
+ "env_filter 0.1.4",
  "log",
 ]
 
@@ -269,7 +269,7 @@ dependencies = [
 [[package]]
 name = "ark-bdk-wallet"
 version = "0.7.0"
-source = "git+https://github.com/ArkLabsHQ/ark-rs.git?rev=f64b45#f64b455123e310e1c3d40ac91c5e193104331827"
+source = "git+https://github.com/ArkLabsHQ/ark-rs.git?rev=f64b455123e310e1c3d40ac91c5e193104331827#f64b455123e310e1c3d40ac91c5e193104331827"
 dependencies = [
  "anyhow",
  "ark-client",
@@ -288,7 +288,7 @@ dependencies = [
 [[package]]
 name = "ark-client"
 version = "0.7.0"
-source = "git+https://github.com/ArkLabsHQ/ark-rs.git?rev=f64b45#f64b455123e310e1c3d40ac91c5e193104331827"
+source = "git+https://github.com/ArkLabsHQ/ark-rs.git?rev=f64b455123e310e1c3d40ac91c5e193104331827#f64b455123e310e1c3d40ac91c5e193104331827"
 dependencies = [
  "ark-core",
  "ark-grpc",
@@ -325,7 +325,7 @@ dependencies = [
 [[package]]
 name = "ark-core"
 version = "0.7.0"
-source = "git+https://github.com/ArkLabsHQ/ark-rs.git?rev=f64b45#f64b455123e310e1c3d40ac91c5e193104331827"
+source = "git+https://github.com/ArkLabsHQ/ark-rs.git?rev=f64b455123e310e1c3d40ac91c5e193104331827#f64b455123e310e1c3d40ac91c5e193104331827"
 dependencies = [
  "ark-secp256k1",
  "bech32 0.11.1",
@@ -342,7 +342,7 @@ dependencies = [
 [[package]]
 name = "ark-grpc"
 version = "0.7.0"
-source = "git+https://github.com/ArkLabsHQ/ark-rs.git?rev=f64b45#f64b455123e310e1c3d40ac91c5e193104331827"
+source = "git+https://github.com/ArkLabsHQ/ark-rs.git?rev=f64b455123e310e1c3d40ac91c5e193104331827#f64b455123e310e1c3d40ac91c5e193104331827"
 dependencies = [
  "ark-core",
  "async-stream",
@@ -360,7 +360,7 @@ dependencies = [
 [[package]]
 name = "ark-secp256k1"
 version = "0.31.0"
-source = "git+https://github.com/ArkLabsHQ/ark-rs.git?rev=f64b45#f64b455123e310e1c3d40ac91c5e193104331827"
+source = "git+https://github.com/ArkLabsHQ/ark-rs.git?rev=f64b455123e310e1c3d40ac91c5e193104331827#f64b455123e310e1c3d40ac91c5e193104331827"
 dependencies = [
  "bitcoin_hashes",
  "rand 0.9.4",
@@ -371,7 +371,7 @@ dependencies = [
 [[package]]
 name = "ark_wallet"
 version = "0.1.0"
-source = "git+https://github.com/SatoshiPortal/ark-wallet-dart?branch=migrate-to-bull-sdk#af16f60084146269ce87a5e29eb258a8b162ba6b"
+source = "git+https://github.com/SatoshiPortal/ark-wallet-dart?branch=migrate-to-bull-sdk#e1f0a42b0fbae9a3442819698d6de4fefb7b229a"
 dependencies = [
  "anyhow",
  "ark-bdk-wallet",
@@ -452,17 +452,6 @@ name = "atomic-waker"
 version = "1.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1505bd5d3d116872e7271a6d4e16d81d0c8570876c8de68093a09ac269d8aac0"
-
-[[package]]
-name = "atty"
-version = "0.2.14"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d9b39be18770d11421cdb1b9947a45dd3f37e93092cbf377614828a319d5fee8"
-dependencies = [
- "hermit-abi 0.1.19",
- "libc",
- "winapi",
-]
 
 [[package]]
 name = "autocfg"
@@ -580,6 +569,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2af50177e190e07a26ab74f8b1efbfe2ef87da2116221318cb1c2e82baf7de06"
 
 [[package]]
+name = "base85"
+version = "2.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "36915bbaca237c626689b5bd14d02f2ba7a5a359d30a2a08be697392e3718079"
+dependencies = [
+ "thiserror 1.0.69",
+]
+
+[[package]]
 name = "basic-toml"
 version = "0.1.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -676,9 +674,22 @@ dependencies = [
 ]
 
 [[package]]
+name = "bip85_extended"
+version = "1.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f300582d6cf7cb4b1f59971f14b4353015a3538b3aa048e3de85c7ef80ac34c9"
+dependencies = [
+ "base64 0.22.1",
+ "base85",
+ "bip39",
+ "bitcoin",
+ "sha3",
+]
+
+[[package]]
 name = "bitbox"
-version = "0.1.0"
-source = "git+https://github.com/SatoshiPortal/bitbox-dart?branch=migrate-to-bull-sdk#837ccd7c1aa090f2de62749616223386e9b264d3"
+version = "0.2.0"
+source = "git+https://github.com/SatoshiPortal/bitbox-dart?branch=migrate-to-bull-sdk#c110af7517707ce3ab847bff32762375703d42c3"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -890,8 +901,8 @@ dependencies = [
 
 [[package]]
 name = "boltz"
-version = "0.1.6"
-source = "git+https://github.com/SatoshiPortal/boltz-dart?branch=migrate-to-bull-sdk#517ba639d7286d817692d09e5087913632ae3d6d"
+version = "0.4.0"
+source = "git+https://github.com/SatoshiPortal/boltz-dart?branch=new-swap-secrets#a03836b127a532c3e88f03b82281a517f8b597bf"
 dependencies = [
  "anyhow",
  "boltz-client",
@@ -906,12 +917,15 @@ dependencies = [
 
 [[package]]
 name = "boltz-client"
-version = "0.3.0"
-source = "git+https://github.com/SatoshiPortal/boltz-rust.git?rev=a5aec30422908026091b1f20f1a3e665722103de#a5aec30422908026091b1f20f1a3e665722103de"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0c3ffd4383a3580e4d1739ec6d583e46191c99957167f26226342174e3fb9ea4"
 dependencies = [
  "async-trait",
  "bip39",
+ "bip85_extended",
  "bitcoin",
+ "boltz-client-macros",
  "electrum-client",
  "elements",
  "env_logger",
@@ -920,10 +934,10 @@ dependencies = [
  "gloo-timers",
  "hex",
  "js-sys",
+ "lightning",
  "lightning-invoice 0.32.0",
  "lnurl-rs",
  "log",
- "macros",
  "reqwest 0.12.28",
  "secp256k1 0.32.0-beta.2",
  "serde",
@@ -932,6 +946,17 @@ dependencies = [
  "url",
  "wasm-bindgen-futures",
  "web-sys",
+]
+
+[[package]]
+name = "boltz-client-macros"
+version = "1.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4bae3bbd82eb8c315b3b120d7cb1a8adef85003216315c42e23abead43ae3835"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 2.0.117",
 ]
 
 [[package]]
@@ -1217,19 +1242,6 @@ dependencies = [
 
 [[package]]
 name = "console"
-version = "0.15.11"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "054ccb5b10f9f2cbf51eb355ca1d05c2d279ce1804688d0db74b4733a5aeafd8"
-dependencies = [
- "encode_unicode",
- "libc",
- "once_cell",
- "unicode-width",
- "windows-sys 0.59.0",
-]
-
-[[package]]
-name = "console"
 version = "0.16.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d64e8af5551369d19cf50138de61f1c42074ab970f74e99be916646777f8fc87"
@@ -1508,7 +1520,7 @@ dependencies = [
 [[package]]
 name = "dart_bbqr"
 version = "0.1.0"
-source = "git+https://github.com/SatoshiPortal/bbqr-dart?branch=migrate-to-bull-sdk#8a6ec949b87196edeb001c63237c726539c02b37"
+source = "git+https://github.com/SatoshiPortal/bbqr-dart?branch=migrate-to-bull-sdk#50b2397a708aa8083c22ae80a49e4dd0d503632e"
 dependencies = [
  "anyhow",
  "bbqr",
@@ -1616,6 +1628,12 @@ dependencies = [
  "quote",
  "syn 2.0.117",
 ]
+
+[[package]]
+name = "dnssec-prover"
+version = "0.6.8"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ec4f825369fc7134da70ca4040fddc8e03b80a46d249ae38d9c1c39b7b4476bf"
 
 [[package]]
 name = "dotenvy"
@@ -1747,16 +1765,26 @@ dependencies = [
 ]
 
 [[package]]
-name = "env_logger"
-version = "0.7.1"
+name = "env_filter"
+version = "1.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "44533bbbb3bb3c1fa17d9f2e4e38bbbaf8396ba82193c4cb1b6445d711445d36"
+checksum = "32e90c2accc4b07a8456ea0debdc2e7587bdd890680d71173a15d4ae604f6eef"
 dependencies = [
- "atty",
- "humantime",
  "log",
  "regex",
- "termcolor",
+]
+
+[[package]]
+name = "env_logger"
+version = "0.11.10"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0621c04f2196ac3f488dd583365b9c09be011a4ab8b9f37248ffcc8f6198b56a"
+dependencies = [
+ "anstream",
+ "anstyle",
+ "env_filter 1.0.1",
+ "jiff",
+ "log",
 ]
 
 [[package]]
@@ -1997,9 +2025,9 @@ dependencies = [
 
 [[package]]
 name = "flutter_rust_bridge_codegen"
-version = "2.9.0"
+version = "2.12.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ce4b53008b970ccd5a2405bf711beb664c43e7fd216624a606e3a60b49b6753c"
+checksum = "13823e8157bada9dc828d67cd23e4bcebcfffa9313175dacad0325fc3188940c"
 dependencies = [
  "anyhow",
  "cargo_metadata",
@@ -2015,7 +2043,7 @@ dependencies = [
  "glob",
  "hex",
  "include_dir",
- "indicatif 0.17.11",
+ "indicatif",
  "indicatif-log-bridge",
  "itertools",
  "lazy_static",
@@ -2370,6 +2398,12 @@ checksum = "8a9ee70c43aaf417c914396645a0fa852624801b24ebb7ae78fe8272889ac888"
 
 [[package]]
 name = "hashbrown"
+version = "0.13.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "43a3c133739dddd0d2990f9a4bdf8eb4b21ef50e4851ca85ab661199821d510e"
+
+[[package]]
+name = "hashbrown"
 version = "0.14.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e5274423e17b7c9fc20b6e7e208532f9b19825d82dfd615708b70edd83df41f1"
@@ -2415,15 +2449,6 @@ name = "heck"
 version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2304e00983f87ffb38b55b444b5e3b60a884b5d30c0fca7d82fe33449bbe55ea"
-
-[[package]]
-name = "hermit-abi"
-version = "0.1.19"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "62b467343b94ba476dcb2500d242dadbb39557df889310ac77c5d99100aaac33"
-dependencies = [
- "libc",
-]
 
 [[package]]
 name = "hermit-abi"
@@ -2551,15 +2576,6 @@ name = "httpdate"
 version = "1.0.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "df3b46402a9d5adb4c86a0cf463f42e19994e3ee891101b1841f30a545cb49a9"
-
-[[package]]
-name = "humantime"
-version = "1.3.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "df004cfca50ef23c36850aaaa59ad52cc70d0e90243c3c7737a4dd32dc7a3c4f"
-dependencies = [
- "quick-error",
-]
 
 [[package]]
 name = "hyper"
@@ -2939,24 +2955,11 @@ dependencies = [
 
 [[package]]
 name = "indicatif"
-version = "0.17.11"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "183b3088984b400f4cfac3620d5e076c84da5364016b4f49473de574b2586235"
-dependencies = [
- "console 0.15.11",
- "number_prefix",
- "portable-atomic",
- "unicode-width",
- "web-time",
-]
-
-[[package]]
-name = "indicatif"
 version = "0.18.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "25470f23803092da7d239834776d653104d551bc4d7eacaf31e6837854b8e9eb"
 dependencies = [
- "console 0.16.3",
+ "console",
  "portable-atomic",
  "unicode-width",
  "unit-prefix",
@@ -2969,7 +2972,7 @@ version = "0.2.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "63703cf9069b85dbe6fe26e1c5230d013dee99d3559cd3d02ba39e099ef7ab02"
 dependencies = [
- "indicatif 0.18.4",
+ "indicatif",
  "log",
 ]
 
@@ -3050,7 +3053,7 @@ version = "0.4.17"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3640c1c38b8e4e43584d8df18be5fc6b0aa314ce6ebf51b53313d4306cca8e46"
 dependencies = [
- "hermit-abi 0.5.2",
+ "hermit-abi",
  "libc",
  "windows-sys 0.61.2",
 ]
@@ -3142,6 +3145,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "keccak"
+version = "0.1.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "cb26cec98cce3a3d96cbb7bced3c4b16e3d13f27ec56dbd62cbc8f39cfb9d653"
+dependencies = [
+ "cpufeatures 0.2.17",
+]
+
+[[package]]
 name = "kqueue"
 version = "1.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3224,6 +3236,23 @@ dependencies = [
 ]
 
 [[package]]
+name = "lightning"
+version = "0.2.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4c90397b635e3ece6b9a723fb470a46cb9b3592f217d72e40540a5fada00289d"
+dependencies = [
+ "bech32 0.11.1",
+ "bitcoin",
+ "dnssec-prover",
+ "hashbrown 0.13.2",
+ "libm",
+ "lightning-invoice 0.34.0",
+ "lightning-macros",
+ "lightning-types 0.3.1",
+ "possiblyrandom",
+]
+
+[[package]]
 name = "lightning-invoice"
 version = "0.32.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3247,6 +3276,28 @@ dependencies = [
 ]
 
 [[package]]
+name = "lightning-invoice"
+version = "0.34.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b85e5e14bcdb30d746e9785b04f27938292e8944f78f26517e01e91691f6b3f2"
+dependencies = [
+ "bech32 0.11.1",
+ "bitcoin",
+ "lightning-types 0.3.1",
+]
+
+[[package]]
+name = "lightning-macros"
+version = "0.2.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d4c717494cdc2c8bb85bee7113031248f5f6c64f8802b33c1c9e2d98e594aa71"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 2.0.117",
+]
+
+[[package]]
 name = "lightning-types"
 version = "0.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3262,6 +3313,15 @@ name = "lightning-types"
 version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f2cd84d4e71472035903e43caded8ecc123066ce466329ccd5ae537a8d5488c7"
+dependencies = [
+ "bitcoin",
+]
+
+[[package]]
+name = "lightning-types"
+version = "0.3.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "cb1aac93f22f2c2eac8a0ee83bb1a1ea58673caa2c82847302710b83364d04e6"
 dependencies = [
  "bitcoin",
 ]
@@ -3326,8 +3386,8 @@ checksum = "112b39cec0b298b6c1999fee3e31427f74f676e4cb9879ed1a121b43661a4154"
 
 [[package]]
 name = "lwk"
-version = "0.2.2"
-source = "git+https://github.com/SatoshiPortal/lwk-dart?branch=migrate-to-bull-sdk#278b8c9bf53a05d325e62b7b3144aa74b5ed39a3"
+version = "0.4.0"
+source = "git+https://github.com/SatoshiPortal/lwk-dart?branch=migrate-to-bull-sdk#845ac2fa9d9fd003707e99924a1e6c9bac5783fe"
 dependencies = [
  "anyhow",
  "flutter_rust_bridge",
@@ -3438,16 +3498,6 @@ dependencies = [
  "url",
  "wasm-bindgen-futures",
  "web-sys",
-]
-
-[[package]]
-name = "macros"
-version = "0.0.0"
-source = "git+https://github.com/SatoshiPortal/boltz-rust.git?rev=a5aec30422908026091b1f20f1a3e665722103de#a5aec30422908026091b1f20f1a3e665722103de"
-dependencies = [
- "proc-macro2",
- "quote",
- "syn 2.0.117",
 ]
 
 [[package]]
@@ -3709,15 +3759,9 @@ version = "1.17.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "91df4bbde75afed763b708b7eee1e8e7651e02d97f6d5dd763e89367e957b23b"
 dependencies = [
- "hermit-abi 0.5.2",
+ "hermit-abi",
  "libc",
 ]
-
-[[package]]
-name = "number_prefix"
-version = "0.4.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "830b246a0e5f20af87141b25c173cd1b609bd7779a4617d6ec582abaf90870f3"
 
 [[package]]
 name = "object"
@@ -3996,6 +4040,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "possiblyrandom"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1b122a615d72104fb3d8b26523fdf9232cd8ee06949fb37e4ce3ff964d15dffd"
+dependencies = [
+ "getrandom 0.2.17",
+]
+
+[[package]]
 name = "potential_utf"
 version = "0.1.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4237,12 +4290,6 @@ checksum = "43d2564aae5faaf3acb512b35b8bcb9a298d9d8c72d181c598691d800ee78a00"
 dependencies = [
  "bmp-monochrome",
 ]
-
-[[package]]
-name = "quick-error"
-version = "1.2.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a1d01941d82fa2ab50be1e79e6714289dd7cde78eba4c074bc5a4374f650dfe0"
 
 [[package]]
 name = "quinn"
@@ -4838,7 +4885,7 @@ dependencies = [
 [[package]]
 name = "secp256k1-sys"
 version = "0.11.0"
-source = "git+https://github.com/ArkLabsHQ/ark-rs.git?rev=f64b45#f64b455123e310e1c3d40ac91c5e193104331827"
+source = "git+https://github.com/ArkLabsHQ/ark-rs.git?rev=f64b455123e310e1c3d40ac91c5e193104331827#f64b455123e310e1c3d40ac91c5e193104331827"
 dependencies = [
  "cc",
 ]
@@ -5127,6 +5174,16 @@ dependencies = [
  "cfg-if",
  "cpufeatures 0.2.17",
  "digest",
+]
+
+[[package]]
+name = "sha3"
+version = "0.10.9"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "77fd7028345d415a4034cf8777cd4f8ab1851274233b45f84e3d955502d93874"
+dependencies = [
+ "digest",
+ "keccak",
 ]
 
 [[package]]
@@ -5657,15 +5714,6 @@ dependencies = [
  "once_cell",
  "rustix 1.1.4",
  "windows-sys 0.61.2",
-]
-
-[[package]]
-name = "termcolor"
-version = "1.4.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "06794f8f6c5c898b3275aebefa6b8a1cb24cd2c6c79397ab15774837a0bc5755"
-dependencies = [
- "winapi-util",
 ]
 
 [[package]]

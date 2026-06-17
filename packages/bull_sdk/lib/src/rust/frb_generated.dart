@@ -28,8 +28,11 @@ import 'third_party/boltz/api/btc_ln.dart';
 import 'third_party/boltz/api/chain_swap.dart';
 import 'third_party/boltz/api/error.dart';
 import 'third_party/boltz/api/fees.dart';
+import 'third_party/boltz/api/invoice.dart';
 import 'third_party/boltz/api/lbtc_ln.dart';
 import 'third_party/boltz/api/lnurl.dart';
+import 'third_party/boltz/api/restore.dart';
+import 'third_party/boltz/api/secrets.dart';
 import 'third_party/boltz/api/swap_status.dart';
 import 'third_party/boltz/api/transactions.dart';
 import 'third_party/boltz/api/types.dart';
@@ -96,7 +99,7 @@ class BullSdk extends BaseEntrypoint<BullSdkApi, BullSdkApiImpl, BullSdkWire> {
   String get codegenVersion => '2.12.0';
 
   @override
-  int get rustContentHash => 1662695056;
+  int get rustContentHash => 1463321419;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -519,8 +522,7 @@ abstract class BullSdkApi extends BaseApi {
   });
 
   Future<BtcLnSwap> boltzApiBtcLnBtcLnSwapNewReverse({
-    required String mnemonic,
-    String? passphrase,
+    required SwapMasterKey swapMasterKey,
     required BigInt index,
     required BigInt outAmount,
     String? outAddress,
@@ -532,8 +534,7 @@ abstract class BullSdkApi extends BaseApi {
   });
 
   Future<BtcLnSwap> boltzApiBtcLnBtcLnSwapNewSubmarine({
-    required String mnemonic,
-    String? passphrase,
+    required SwapMasterKey swapMasterKey,
     required BigInt index,
     required String invoice,
     required Chain network,
@@ -632,8 +633,7 @@ abstract class BullSdkApi extends BaseApi {
 
   Future<ChainSwap> boltzApiChainSwapChainSwapNewSwap({
     required ChainSwapDirection direction,
-    required String mnemonic,
-    String? passphrase,
+    required SwapMasterKey swapMasterKey,
     required BigInt index,
     required BigInt amount,
     required bool isTestnet,
@@ -677,7 +677,7 @@ abstract class BullSdkApi extends BaseApi {
 
   Future<bool> bitboxApiConfirmPairing({required String serialNumber});
 
-  Future<DecodedInvoice> boltzApiTypesDecodedInvoiceFromString({
+  Future<DecodedInvoice> boltzApiInvoiceDecodedInvoiceFromString({
     required String s,
     String? boltzUrl,
   });
@@ -746,19 +746,6 @@ abstract class BullSdkApi extends BaseApi {
 
   Future<Joined> bbqrJoinJoinedFrbOverrideTryFromParts({
     required List<String> parts,
-  });
-
-  Future<KeyPair> boltzApiTypesKeyPairGenerate({
-    required String mnemonic,
-    String? passphrase,
-    required Chain network,
-    required BigInt index,
-    required SwapType swapType,
-  });
-
-  Future<KeyPair> boltzApiTypesKeyPairNew({
-    required String secretKey,
-    required String publicKey,
   });
 
   Future<LBtcSwapScriptStr> boltzApiTypesLBtcSwapScriptStrNew({
@@ -831,8 +818,7 @@ abstract class BullSdkApi extends BaseApi {
   });
 
   Future<LbtcLnSwap> boltzApiLbtcLnLbtcLnSwapNewReverse({
-    required String mnemonic,
-    String? passphrase,
+    required SwapMasterKey swapMasterKey,
     required BigInt index,
     required BigInt outAmount,
     String? outAddress,
@@ -844,8 +830,7 @@ abstract class BullSdkApi extends BaseApi {
   });
 
   Future<LbtcLnSwap> boltzApiLbtcLnLbtcLnSwapNewSubmarine({
-    required String mnemonic,
-    String? passphrase,
+    required SwapMasterKey swapMasterKey,
     required BigInt index,
     required String invoice,
     required Chain network,
@@ -886,12 +871,33 @@ abstract class BullSdkApi extends BaseApi {
     required String invoice,
   });
 
-  Future<PreImage> boltzApiTypesPreImageGenerate();
+  Future<PreImage> boltzApiSecretsPreImageFromInvoiceStr({
+    required String invoice,
+  });
 
-  Future<PreImage> boltzApiTypesPreImageNew({
+  Future<PreImage> boltzApiSecretsPreImageNew({
     required String value,
     required String sha256,
     required String hash160,
+  });
+
+  Future<List<ChainSwap>> boltzApiRestoreRestoreChainSwaps({
+    required SwapMasterKey swapMasterKey,
+    required String btcElectrumUrl,
+    required String lbtcElectrumUrl,
+    required String boltzUrl,
+  });
+
+  Future<List<BtcLnSwap>> boltzApiRestoreRestoreLnBtcSwaps({
+    required SwapMasterKey swapMasterKey,
+    required String electrumUrl,
+    required String boltzUrl,
+  });
+
+  Future<List<LbtcLnSwap>> boltzApiRestoreRestoreLnLbtcSwaps({
+    required SwapMasterKey swapMasterKey,
+    required String electrumUrl,
+    required String boltzUrl,
   });
 
   void bitboxApiSetUsbReadDataWrapper({
@@ -914,6 +920,12 @@ abstract class BullSdkApi extends BaseApi {
   Future<SplitOptions> bbqrSplitSplitOptionsDefault();
 
   Future<String?> bitboxApiStartPairing({required String serialNumber});
+
+  Future<SwapMasterKey> boltzApiSecretsSwapMasterKeyCreate({
+    required String walletMnemonic,
+    String? walletPassphrase,
+    required Network network,
+  });
 
   String boltzApiSwapStatusSwapStatusAsString({required SwapStatus that});
 
@@ -4109,8 +4121,7 @@ class BullSdkApiImpl extends BullSdkApiImplPlatform implements BullSdkApi {
 
   @override
   Future<BtcLnSwap> boltzApiBtcLnBtcLnSwapNewReverse({
-    required String mnemonic,
-    String? passphrase,
+    required SwapMasterKey swapMasterKey,
     required BigInt index,
     required BigInt outAmount,
     String? outAddress,
@@ -4123,16 +4134,15 @@ class BullSdkApiImpl extends BullSdkApiImplPlatform implements BullSdkApi {
     return handler.executeNormal(
       NormalTask(
         callFfi: (port_) {
-          var arg0 = cst_encode_String(mnemonic);
-          var arg1 = cst_encode_opt_String(passphrase);
-          var arg2 = cst_encode_u_64(index);
-          var arg3 = cst_encode_u_64(outAmount);
-          var arg4 = cst_encode_opt_String(outAddress);
-          var arg5 = cst_encode_chain(network);
-          var arg6 = cst_encode_String(electrumUrl);
-          var arg7 = cst_encode_String(boltzUrl);
-          var arg8 = cst_encode_opt_String(description);
-          var arg9 = cst_encode_opt_String(referralId);
+          var arg0 = cst_encode_box_autoadd_swap_master_key(swapMasterKey);
+          var arg1 = cst_encode_u_64(index);
+          var arg2 = cst_encode_u_64(outAmount);
+          var arg3 = cst_encode_opt_String(outAddress);
+          var arg4 = cst_encode_chain(network);
+          var arg5 = cst_encode_String(electrumUrl);
+          var arg6 = cst_encode_String(boltzUrl);
+          var arg7 = cst_encode_opt_String(description);
+          var arg8 = cst_encode_opt_String(referralId);
           return wire.wire__boltz__api__btc_ln__btc_ln_swap_new_reverse(
             port_,
             arg0,
@@ -4144,7 +4154,6 @@ class BullSdkApiImpl extends BullSdkApiImplPlatform implements BullSdkApi {
             arg6,
             arg7,
             arg8,
-            arg9,
           );
         },
         codec: DcoCodec(
@@ -4153,8 +4162,7 @@ class BullSdkApiImpl extends BullSdkApiImplPlatform implements BullSdkApi {
         ),
         constMeta: kBoltzApiBtcLnBtcLnSwapNewReverseConstMeta,
         argValues: [
-          mnemonic,
-          passphrase,
+          swapMasterKey,
           index,
           outAmount,
           outAddress,
@@ -4173,8 +4181,7 @@ class BullSdkApiImpl extends BullSdkApiImplPlatform implements BullSdkApi {
       const TaskConstMeta(
         debugName: "btc_ln_swap_new_reverse",
         argNames: [
-          "mnemonic",
-          "passphrase",
+          "swapMasterKey",
           "index",
           "outAmount",
           "outAddress",
@@ -4188,8 +4195,7 @@ class BullSdkApiImpl extends BullSdkApiImplPlatform implements BullSdkApi {
 
   @override
   Future<BtcLnSwap> boltzApiBtcLnBtcLnSwapNewSubmarine({
-    required String mnemonic,
-    String? passphrase,
+    required SwapMasterKey swapMasterKey,
     required BigInt index,
     required String invoice,
     required Chain network,
@@ -4200,14 +4206,13 @@ class BullSdkApiImpl extends BullSdkApiImplPlatform implements BullSdkApi {
     return handler.executeNormal(
       NormalTask(
         callFfi: (port_) {
-          var arg0 = cst_encode_String(mnemonic);
-          var arg1 = cst_encode_opt_String(passphrase);
-          var arg2 = cst_encode_u_64(index);
-          var arg3 = cst_encode_String(invoice);
-          var arg4 = cst_encode_chain(network);
-          var arg5 = cst_encode_String(electrumUrl);
-          var arg6 = cst_encode_String(boltzUrl);
-          var arg7 = cst_encode_opt_String(referralId);
+          var arg0 = cst_encode_box_autoadd_swap_master_key(swapMasterKey);
+          var arg1 = cst_encode_u_64(index);
+          var arg2 = cst_encode_String(invoice);
+          var arg3 = cst_encode_chain(network);
+          var arg4 = cst_encode_String(electrumUrl);
+          var arg5 = cst_encode_String(boltzUrl);
+          var arg6 = cst_encode_opt_String(referralId);
           return wire.wire__boltz__api__btc_ln__btc_ln_swap_new_submarine(
             port_,
             arg0,
@@ -4217,7 +4222,6 @@ class BullSdkApiImpl extends BullSdkApiImplPlatform implements BullSdkApi {
             arg4,
             arg5,
             arg6,
-            arg7,
           );
         },
         codec: DcoCodec(
@@ -4226,8 +4230,7 @@ class BullSdkApiImpl extends BullSdkApiImplPlatform implements BullSdkApi {
         ),
         constMeta: kBoltzApiBtcLnBtcLnSwapNewSubmarineConstMeta,
         argValues: [
-          mnemonic,
-          passphrase,
+          swapMasterKey,
           index,
           invoice,
           network,
@@ -4244,8 +4247,7 @@ class BullSdkApiImpl extends BullSdkApiImplPlatform implements BullSdkApi {
       const TaskConstMeta(
         debugName: "btc_ln_swap_new_submarine",
         argNames: [
-          "mnemonic",
-          "passphrase",
+          "swapMasterKey",
           "index",
           "invoice",
           "network",
@@ -4840,8 +4842,7 @@ class BullSdkApiImpl extends BullSdkApiImplPlatform implements BullSdkApi {
   @override
   Future<ChainSwap> boltzApiChainSwapChainSwapNewSwap({
     required ChainSwapDirection direction,
-    required String mnemonic,
-    String? passphrase,
+    required SwapMasterKey swapMasterKey,
     required BigInt index,
     required BigInt amount,
     required bool isTestnet,
@@ -4854,15 +4855,14 @@ class BullSdkApiImpl extends BullSdkApiImplPlatform implements BullSdkApi {
       NormalTask(
         callFfi: (port_) {
           var arg0 = cst_encode_chain_swap_direction(direction);
-          var arg1 = cst_encode_String(mnemonic);
-          var arg2 = cst_encode_opt_String(passphrase);
-          var arg3 = cst_encode_u_64(index);
-          var arg4 = cst_encode_u_64(amount);
-          var arg5 = cst_encode_bool(isTestnet);
-          var arg6 = cst_encode_String(btcElectrumUrl);
-          var arg7 = cst_encode_String(lbtcElectrumUrl);
-          var arg8 = cst_encode_String(boltzUrl);
-          var arg9 = cst_encode_opt_String(referralId);
+          var arg1 = cst_encode_box_autoadd_swap_master_key(swapMasterKey);
+          var arg2 = cst_encode_u_64(index);
+          var arg3 = cst_encode_u_64(amount);
+          var arg4 = cst_encode_bool(isTestnet);
+          var arg5 = cst_encode_String(btcElectrumUrl);
+          var arg6 = cst_encode_String(lbtcElectrumUrl);
+          var arg7 = cst_encode_String(boltzUrl);
+          var arg8 = cst_encode_opt_String(referralId);
           return wire.wire__boltz__api__chain_swap__chain_swap_new_swap(
             port_,
             arg0,
@@ -4874,7 +4874,6 @@ class BullSdkApiImpl extends BullSdkApiImplPlatform implements BullSdkApi {
             arg6,
             arg7,
             arg8,
-            arg9,
           );
         },
         codec: DcoCodec(
@@ -4884,8 +4883,7 @@ class BullSdkApiImpl extends BullSdkApiImplPlatform implements BullSdkApi {
         constMeta: kBoltzApiChainSwapChainSwapNewSwapConstMeta,
         argValues: [
           direction,
-          mnemonic,
-          passphrase,
+          swapMasterKey,
           index,
           amount,
           isTestnet,
@@ -4904,8 +4902,7 @@ class BullSdkApiImpl extends BullSdkApiImplPlatform implements BullSdkApi {
         debugName: "chain_swap_new_swap",
         argNames: [
           "direction",
-          "mnemonic",
-          "passphrase",
+          "swapMasterKey",
           "index",
           "amount",
           "isTestnet",
@@ -5196,7 +5193,7 @@ class BullSdkApiImpl extends BullSdkApiImplPlatform implements BullSdkApi {
   );
 
   @override
-  Future<DecodedInvoice> boltzApiTypesDecodedInvoiceFromString({
+  Future<DecodedInvoice> boltzApiInvoiceDecodedInvoiceFromString({
     required String s,
     String? boltzUrl,
   }) {
@@ -5205,7 +5202,7 @@ class BullSdkApiImpl extends BullSdkApiImplPlatform implements BullSdkApi {
         callFfi: (port_) {
           var arg0 = cst_encode_String(s);
           var arg1 = cst_encode_opt_String(boltzUrl);
-          return wire.wire__boltz__api__types__decoded_invoice_from_string(
+          return wire.wire__boltz__api__invoice__decoded_invoice_from_string(
             port_,
             arg0,
             arg1,
@@ -5215,14 +5212,14 @@ class BullSdkApiImpl extends BullSdkApiImplPlatform implements BullSdkApi {
           decodeSuccessData: dco_decode_decoded_invoice,
           decodeErrorData: dco_decode_boltz_error,
         ),
-        constMeta: kBoltzApiTypesDecodedInvoiceFromStringConstMeta,
+        constMeta: kBoltzApiInvoiceDecodedInvoiceFromStringConstMeta,
         argValues: [s, boltzUrl],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta get kBoltzApiTypesDecodedInvoiceFromStringConstMeta =>
+  TaskConstMeta get kBoltzApiInvoiceDecodedInvoiceFromStringConstMeta =>
       const TaskConstMeta(
         debugName: "decoded_invoice_from_string",
         argNames: ["s", "boltzUrl"],
@@ -5851,76 +5848,6 @@ class BullSdkApiImpl extends BullSdkApiImplPlatform implements BullSdkApi {
       );
 
   @override
-  Future<KeyPair> boltzApiTypesKeyPairGenerate({
-    required String mnemonic,
-    String? passphrase,
-    required Chain network,
-    required BigInt index,
-    required SwapType swapType,
-  }) {
-    return handler.executeNormal(
-      NormalTask(
-        callFfi: (port_) {
-          var arg0 = cst_encode_String(mnemonic);
-          var arg1 = cst_encode_opt_String(passphrase);
-          var arg2 = cst_encode_chain(network);
-          var arg3 = cst_encode_u_64(index);
-          var arg4 = cst_encode_swap_type(swapType);
-          return wire.wire__boltz__api__types__key_pair_generate(
-            port_,
-            arg0,
-            arg1,
-            arg2,
-            arg3,
-            arg4,
-          );
-        },
-        codec: DcoCodec(
-          decodeSuccessData: dco_decode_key_pair,
-          decodeErrorData: dco_decode_boltz_error,
-        ),
-        constMeta: kBoltzApiTypesKeyPairGenerateConstMeta,
-        argValues: [mnemonic, passphrase, network, index, swapType],
-        apiImpl: this,
-      ),
-    );
-  }
-
-  TaskConstMeta get kBoltzApiTypesKeyPairGenerateConstMeta =>
-      const TaskConstMeta(
-        debugName: "key_pair_generate",
-        argNames: ["mnemonic", "passphrase", "network", "index", "swapType"],
-      );
-
-  @override
-  Future<KeyPair> boltzApiTypesKeyPairNew({
-    required String secretKey,
-    required String publicKey,
-  }) {
-    return handler.executeNormal(
-      NormalTask(
-        callFfi: (port_) {
-          var arg0 = cst_encode_String(secretKey);
-          var arg1 = cst_encode_String(publicKey);
-          return wire.wire__boltz__api__types__key_pair_new(port_, arg0, arg1);
-        },
-        codec: DcoCodec(
-          decodeSuccessData: dco_decode_key_pair,
-          decodeErrorData: null,
-        ),
-        constMeta: kBoltzApiTypesKeyPairNewConstMeta,
-        argValues: [secretKey, publicKey],
-        apiImpl: this,
-      ),
-    );
-  }
-
-  TaskConstMeta get kBoltzApiTypesKeyPairNewConstMeta => const TaskConstMeta(
-    debugName: "key_pair_new",
-    argNames: ["secretKey", "publicKey"],
-  );
-
-  @override
   Future<LBtcSwapScriptStr> boltzApiTypesLBtcSwapScriptStrNew({
     required SwapType swapType,
     String? fundingAddrs,
@@ -6373,8 +6300,7 @@ class BullSdkApiImpl extends BullSdkApiImplPlatform implements BullSdkApi {
 
   @override
   Future<LbtcLnSwap> boltzApiLbtcLnLbtcLnSwapNewReverse({
-    required String mnemonic,
-    String? passphrase,
+    required SwapMasterKey swapMasterKey,
     required BigInt index,
     required BigInt outAmount,
     String? outAddress,
@@ -6387,16 +6313,15 @@ class BullSdkApiImpl extends BullSdkApiImplPlatform implements BullSdkApi {
     return handler.executeNormal(
       NormalTask(
         callFfi: (port_) {
-          var arg0 = cst_encode_String(mnemonic);
-          var arg1 = cst_encode_opt_String(passphrase);
-          var arg2 = cst_encode_u_64(index);
-          var arg3 = cst_encode_u_64(outAmount);
-          var arg4 = cst_encode_opt_String(outAddress);
-          var arg5 = cst_encode_chain(network);
-          var arg6 = cst_encode_String(electrumUrl);
-          var arg7 = cst_encode_String(boltzUrl);
-          var arg8 = cst_encode_opt_String(description);
-          var arg9 = cst_encode_opt_String(referralId);
+          var arg0 = cst_encode_box_autoadd_swap_master_key(swapMasterKey);
+          var arg1 = cst_encode_u_64(index);
+          var arg2 = cst_encode_u_64(outAmount);
+          var arg3 = cst_encode_opt_String(outAddress);
+          var arg4 = cst_encode_chain(network);
+          var arg5 = cst_encode_String(electrumUrl);
+          var arg6 = cst_encode_String(boltzUrl);
+          var arg7 = cst_encode_opt_String(description);
+          var arg8 = cst_encode_opt_String(referralId);
           return wire.wire__boltz__api__lbtc_ln__lbtc_ln_swap_new_reverse(
             port_,
             arg0,
@@ -6408,7 +6333,6 @@ class BullSdkApiImpl extends BullSdkApiImplPlatform implements BullSdkApi {
             arg6,
             arg7,
             arg8,
-            arg9,
           );
         },
         codec: DcoCodec(
@@ -6417,8 +6341,7 @@ class BullSdkApiImpl extends BullSdkApiImplPlatform implements BullSdkApi {
         ),
         constMeta: kBoltzApiLbtcLnLbtcLnSwapNewReverseConstMeta,
         argValues: [
-          mnemonic,
-          passphrase,
+          swapMasterKey,
           index,
           outAmount,
           outAddress,
@@ -6437,8 +6360,7 @@ class BullSdkApiImpl extends BullSdkApiImplPlatform implements BullSdkApi {
       const TaskConstMeta(
         debugName: "lbtc_ln_swap_new_reverse",
         argNames: [
-          "mnemonic",
-          "passphrase",
+          "swapMasterKey",
           "index",
           "outAmount",
           "outAddress",
@@ -6452,8 +6374,7 @@ class BullSdkApiImpl extends BullSdkApiImplPlatform implements BullSdkApi {
 
   @override
   Future<LbtcLnSwap> boltzApiLbtcLnLbtcLnSwapNewSubmarine({
-    required String mnemonic,
-    String? passphrase,
+    required SwapMasterKey swapMasterKey,
     required BigInt index,
     required String invoice,
     required Chain network,
@@ -6464,14 +6385,13 @@ class BullSdkApiImpl extends BullSdkApiImplPlatform implements BullSdkApi {
     return handler.executeNormal(
       NormalTask(
         callFfi: (port_) {
-          var arg0 = cst_encode_String(mnemonic);
-          var arg1 = cst_encode_opt_String(passphrase);
-          var arg2 = cst_encode_u_64(index);
-          var arg3 = cst_encode_String(invoice);
-          var arg4 = cst_encode_chain(network);
-          var arg5 = cst_encode_String(electrumUrl);
-          var arg6 = cst_encode_String(boltzUrl);
-          var arg7 = cst_encode_opt_String(referralId);
+          var arg0 = cst_encode_box_autoadd_swap_master_key(swapMasterKey);
+          var arg1 = cst_encode_u_64(index);
+          var arg2 = cst_encode_String(invoice);
+          var arg3 = cst_encode_chain(network);
+          var arg4 = cst_encode_String(electrumUrl);
+          var arg5 = cst_encode_String(boltzUrl);
+          var arg6 = cst_encode_opt_String(referralId);
           return wire.wire__boltz__api__lbtc_ln__lbtc_ln_swap_new_submarine(
             port_,
             arg0,
@@ -6481,7 +6401,6 @@ class BullSdkApiImpl extends BullSdkApiImplPlatform implements BullSdkApi {
             arg4,
             arg5,
             arg6,
-            arg7,
           );
         },
         codec: DcoCodec(
@@ -6490,8 +6409,7 @@ class BullSdkApiImpl extends BullSdkApiImplPlatform implements BullSdkApi {
         ),
         constMeta: kBoltzApiLbtcLnLbtcLnSwapNewSubmarineConstMeta,
         argValues: [
-          mnemonic,
-          passphrase,
+          swapMasterKey,
           index,
           invoice,
           network,
@@ -6508,8 +6426,7 @@ class BullSdkApiImpl extends BullSdkApiImplPlatform implements BullSdkApi {
       const TaskConstMeta(
         debugName: "lbtc_ln_swap_new_submarine",
         argNames: [
-          "mnemonic",
-          "passphrase",
+          "swapMasterKey",
           "index",
           "invoice",
           "network",
@@ -6773,28 +6690,37 @@ class BullSdkApiImpl extends BullSdkApiImplPlatform implements BullSdkApi {
   );
 
   @override
-  Future<PreImage> boltzApiTypesPreImageGenerate() {
+  Future<PreImage> boltzApiSecretsPreImageFromInvoiceStr({
+    required String invoice,
+  }) {
     return handler.executeNormal(
       NormalTask(
         callFfi: (port_) {
-          return wire.wire__boltz__api__types__pre_image_generate(port_);
+          var arg0 = cst_encode_String(invoice);
+          return wire.wire__boltz__api__secrets__pre_image_from_invoice_str(
+            port_,
+            arg0,
+          );
         },
         codec: DcoCodec(
           decodeSuccessData: dco_decode_pre_image,
-          decodeErrorData: null,
+          decodeErrorData: dco_decode_boltz_error,
         ),
-        constMeta: kBoltzApiTypesPreImageGenerateConstMeta,
-        argValues: [],
+        constMeta: kBoltzApiSecretsPreImageFromInvoiceStrConstMeta,
+        argValues: [invoice],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta get kBoltzApiTypesPreImageGenerateConstMeta =>
-      const TaskConstMeta(debugName: "pre_image_generate", argNames: []);
+  TaskConstMeta get kBoltzApiSecretsPreImageFromInvoiceStrConstMeta =>
+      const TaskConstMeta(
+        debugName: "pre_image_from_invoice_str",
+        argNames: ["invoice"],
+      );
 
   @override
-  Future<PreImage> boltzApiTypesPreImageNew({
+  Future<PreImage> boltzApiSecretsPreImageNew({
     required String value,
     required String sha256,
     required String hash160,
@@ -6805,7 +6731,7 @@ class BullSdkApiImpl extends BullSdkApiImplPlatform implements BullSdkApi {
           var arg0 = cst_encode_String(value);
           var arg1 = cst_encode_String(sha256);
           var arg2 = cst_encode_String(hash160);
-          return wire.wire__boltz__api__types__pre_image_new(
+          return wire.wire__boltz__api__secrets__pre_image_new(
             port_,
             arg0,
             arg1,
@@ -6816,17 +6742,133 @@ class BullSdkApiImpl extends BullSdkApiImplPlatform implements BullSdkApi {
           decodeSuccessData: dco_decode_pre_image,
           decodeErrorData: null,
         ),
-        constMeta: kBoltzApiTypesPreImageNewConstMeta,
+        constMeta: kBoltzApiSecretsPreImageNewConstMeta,
         argValues: [value, sha256, hash160],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta get kBoltzApiTypesPreImageNewConstMeta => const TaskConstMeta(
+  TaskConstMeta get kBoltzApiSecretsPreImageNewConstMeta => const TaskConstMeta(
     debugName: "pre_image_new",
     argNames: ["value", "sha256", "hash160"],
   );
+
+  @override
+  Future<List<ChainSwap>> boltzApiRestoreRestoreChainSwaps({
+    required SwapMasterKey swapMasterKey,
+    required String btcElectrumUrl,
+    required String lbtcElectrumUrl,
+    required String boltzUrl,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          var arg0 = cst_encode_box_autoadd_swap_master_key(swapMasterKey);
+          var arg1 = cst_encode_String(btcElectrumUrl);
+          var arg2 = cst_encode_String(lbtcElectrumUrl);
+          var arg3 = cst_encode_String(boltzUrl);
+          return wire.wire__boltz__api__restore__restore_chain_swaps(
+            port_,
+            arg0,
+            arg1,
+            arg2,
+            arg3,
+          );
+        },
+        codec: DcoCodec(
+          decodeSuccessData: dco_decode_list_chain_swap,
+          decodeErrorData: dco_decode_boltz_error,
+        ),
+        constMeta: kBoltzApiRestoreRestoreChainSwapsConstMeta,
+        argValues: [swapMasterKey, btcElectrumUrl, lbtcElectrumUrl, boltzUrl],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kBoltzApiRestoreRestoreChainSwapsConstMeta =>
+      const TaskConstMeta(
+        debugName: "restore_chain_swaps",
+        argNames: [
+          "swapMasterKey",
+          "btcElectrumUrl",
+          "lbtcElectrumUrl",
+          "boltzUrl",
+        ],
+      );
+
+  @override
+  Future<List<BtcLnSwap>> boltzApiRestoreRestoreLnBtcSwaps({
+    required SwapMasterKey swapMasterKey,
+    required String electrumUrl,
+    required String boltzUrl,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          var arg0 = cst_encode_box_autoadd_swap_master_key(swapMasterKey);
+          var arg1 = cst_encode_String(electrumUrl);
+          var arg2 = cst_encode_String(boltzUrl);
+          return wire.wire__boltz__api__restore__restore_ln_btc_swaps(
+            port_,
+            arg0,
+            arg1,
+            arg2,
+          );
+        },
+        codec: DcoCodec(
+          decodeSuccessData: dco_decode_list_btc_ln_swap,
+          decodeErrorData: dco_decode_boltz_error,
+        ),
+        constMeta: kBoltzApiRestoreRestoreLnBtcSwapsConstMeta,
+        argValues: [swapMasterKey, electrumUrl, boltzUrl],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kBoltzApiRestoreRestoreLnBtcSwapsConstMeta =>
+      const TaskConstMeta(
+        debugName: "restore_ln_btc_swaps",
+        argNames: ["swapMasterKey", "electrumUrl", "boltzUrl"],
+      );
+
+  @override
+  Future<List<LbtcLnSwap>> boltzApiRestoreRestoreLnLbtcSwaps({
+    required SwapMasterKey swapMasterKey,
+    required String electrumUrl,
+    required String boltzUrl,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          var arg0 = cst_encode_box_autoadd_swap_master_key(swapMasterKey);
+          var arg1 = cst_encode_String(electrumUrl);
+          var arg2 = cst_encode_String(boltzUrl);
+          return wire.wire__boltz__api__restore__restore_ln_lbtc_swaps(
+            port_,
+            arg0,
+            arg1,
+            arg2,
+          );
+        },
+        codec: DcoCodec(
+          decodeSuccessData: dco_decode_list_lbtc_ln_swap,
+          decodeErrorData: dco_decode_boltz_error,
+        ),
+        constMeta: kBoltzApiRestoreRestoreLnLbtcSwapsConstMeta,
+        argValues: [swapMasterKey, electrumUrl, boltzUrl],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kBoltzApiRestoreRestoreLnLbtcSwapsConstMeta =>
+      const TaskConstMeta(
+        debugName: "restore_ln_lbtc_swaps",
+        argNames: ["swapMasterKey", "electrumUrl", "boltzUrl"],
+      );
 
   @override
   void bitboxApiSetUsbReadDataWrapper({
@@ -6967,6 +7009,42 @@ class BullSdkApiImpl extends BullSdkApiImplPlatform implements BullSdkApi {
     debugName: "start_pairing",
     argNames: ["serialNumber"],
   );
+
+  @override
+  Future<SwapMasterKey> boltzApiSecretsSwapMasterKeyCreate({
+    required String walletMnemonic,
+    String? walletPassphrase,
+    required Network network,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          var arg0 = cst_encode_String(walletMnemonic);
+          var arg1 = cst_encode_opt_String(walletPassphrase);
+          var arg2 = cst_encode_network(network);
+          return wire.wire__boltz__api__secrets__swap_master_key_create(
+            port_,
+            arg0,
+            arg1,
+            arg2,
+          );
+        },
+        codec: DcoCodec(
+          decodeSuccessData: dco_decode_swap_master_key,
+          decodeErrorData: dco_decode_boltz_error,
+        ),
+        constMeta: kBoltzApiSecretsSwapMasterKeyCreateConstMeta,
+        argValues: [walletMnemonic, walletPassphrase, network],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kBoltzApiSecretsSwapMasterKeyCreateConstMeta =>
+      const TaskConstMeta(
+        debugName: "swap_master_key_create",
+        argNames: ["walletMnemonic", "walletPassphrase", "network"],
+      );
 
   @override
   String boltzApiSwapStatusSwapStatusAsString({required SwapStatus that}) {
@@ -7875,6 +7953,12 @@ class BullSdkApiImpl extends BullSdkApiImplPlatform implements BullSdkApi {
   }
 
   @protected
+  SwapMasterKey dco_decode_box_autoadd_swap_master_key(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_swap_master_key(raw);
+  }
+
+  @protected
   SwapStatusResponse dco_decode_box_autoadd_swap_status_response(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_swap_status_response(raw);
@@ -7981,10 +8065,10 @@ class BullSdkApiImpl extends BullSdkApiImplPlatform implements BullSdkApi {
     if (arr.length != 4)
       throw Exception('unexpected arr length: expect 4 but see ${arr.length}');
     return ChainFeesAndLimits(
-      btcLimits: dco_decode_swap_limits(arr[0]),
-      lbtcLimits: dco_decode_swap_limits(arr[1]),
-      btcFees: dco_decode_chain_swap_fees(arr[2]),
-      lbtcFees: dco_decode_chain_swap_fees(arr[3]),
+      lbtcToBtcLimits: dco_decode_swap_limits(arr[0]),
+      btcToLbtcLimits: dco_decode_swap_limits(arr[1]),
+      lbtcToBtcFees: dco_decode_chain_swap_fees(arr[2]),
+      btcToLbtcFees: dco_decode_chain_swap_fees(arr[3]),
     );
   }
 
@@ -8219,6 +8303,24 @@ class BullSdkApiImpl extends BullSdkApiImplPlatform implements BullSdkApi {
   List<Balance> dco_decode_list_balance(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return (raw as List<dynamic>).map(dco_decode_balance).toList();
+  }
+
+  @protected
+  List<BtcLnSwap> dco_decode_list_btc_ln_swap(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>).map(dco_decode_btc_ln_swap).toList();
+  }
+
+  @protected
+  List<ChainSwap> dco_decode_list_chain_swap(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>).map(dco_decode_chain_swap).toList();
+  }
+
+  @protected
+  List<LbtcLnSwap> dco_decode_list_lbtc_ln_swap(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>).map(dco_decode_lbtc_ln_swap).toList();
   }
 
   @protected
@@ -8630,11 +8732,28 @@ class BullSdkApiImpl extends BullSdkApiImplPlatform implements BullSdkApi {
   SwapLimits dco_decode_swap_limits(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
-    if (arr.length != 2)
-      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    if (arr.length != 4)
+      throw Exception('unexpected arr length: expect 4 but see ${arr.length}');
     return SwapLimits(
       minimal: dco_decode_u_64(arr[0]),
       maximal: dco_decode_u_64(arr[1]),
+      maximalZeroConf: dco_decode_opt_box_autoadd_u_64(arr[2]),
+      minimalBatched: dco_decode_opt_box_autoadd_u_64(arr[3]),
+    );
+  }
+
+  @protected
+  SwapMasterKey dco_decode_swap_master_key(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 5)
+      throw Exception('unexpected arr length: expect 5 but see ${arr.length}');
+    return SwapMasterKey(
+      xprv: dco_decode_String(arr[0]),
+      xpub: dco_decode_String(arr[1]),
+      network: dco_decode_network(arr[2]),
+      mnemonic: dco_decode_String(arr[3]),
+      fingerprint: dco_decode_String(arr[4]),
     );
   }
 
@@ -9382,6 +9501,14 @@ class BullSdkApiImpl extends BullSdkApiImplPlatform implements BullSdkApi {
   }
 
   @protected
+  SwapMasterKey sse_decode_box_autoadd_swap_master_key(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_swap_master_key(deserializer));
+  }
+
+  @protected
   SwapStatusResponse sse_decode_box_autoadd_swap_status_response(
     SseDeserializer deserializer,
   ) {
@@ -9507,15 +9634,15 @@ class BullSdkApiImpl extends BullSdkApiImplPlatform implements BullSdkApi {
     SseDeserializer deserializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_btcLimits = sse_decode_swap_limits(deserializer);
-    var var_lbtcLimits = sse_decode_swap_limits(deserializer);
-    var var_btcFees = sse_decode_chain_swap_fees(deserializer);
-    var var_lbtcFees = sse_decode_chain_swap_fees(deserializer);
+    var var_lbtcToBtcLimits = sse_decode_swap_limits(deserializer);
+    var var_btcToLbtcLimits = sse_decode_swap_limits(deserializer);
+    var var_lbtcToBtcFees = sse_decode_chain_swap_fees(deserializer);
+    var var_btcToLbtcFees = sse_decode_chain_swap_fees(deserializer);
     return ChainFeesAndLimits(
-      btcLimits: var_btcLimits,
-      lbtcLimits: var_lbtcLimits,
-      btcFees: var_btcFees,
-      lbtcFees: var_lbtcFees,
+      lbtcToBtcLimits: var_lbtcToBtcLimits,
+      btcToLbtcLimits: var_btcToLbtcLimits,
+      lbtcToBtcFees: var_lbtcToBtcFees,
+      btcToLbtcFees: var_btcToLbtcFees,
     );
   }
 
@@ -9806,6 +9933,42 @@ class BullSdkApiImpl extends BullSdkApiImplPlatform implements BullSdkApi {
     var ans_ = <Balance>[];
     for (var idx_ = 0; idx_ < len_; ++idx_) {
       ans_.add(sse_decode_balance(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  List<BtcLnSwap> sse_decode_list_btc_ln_swap(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <BtcLnSwap>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_btc_ln_swap(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  List<ChainSwap> sse_decode_list_chain_swap(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <ChainSwap>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_chain_swap(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  List<LbtcLnSwap> sse_decode_list_lbtc_ln_swap(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <LbtcLnSwap>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_lbtc_ln_swap(deserializer));
     }
     return ans_;
   }
@@ -10348,7 +10511,31 @@ class BullSdkApiImpl extends BullSdkApiImplPlatform implements BullSdkApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_minimal = sse_decode_u_64(deserializer);
     var var_maximal = sse_decode_u_64(deserializer);
-    return SwapLimits(minimal: var_minimal, maximal: var_maximal);
+    var var_maximalZeroConf = sse_decode_opt_box_autoadd_u_64(deserializer);
+    var var_minimalBatched = sse_decode_opt_box_autoadd_u_64(deserializer);
+    return SwapLimits(
+      minimal: var_minimal,
+      maximal: var_maximal,
+      maximalZeroConf: var_maximalZeroConf,
+      minimalBatched: var_minimalBatched,
+    );
+  }
+
+  @protected
+  SwapMasterKey sse_decode_swap_master_key(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_xprv = sse_decode_String(deserializer);
+    var var_xpub = sse_decode_String(deserializer);
+    var var_network = sse_decode_network(deserializer);
+    var var_mnemonic = sse_decode_String(deserializer);
+    var var_fingerprint = sse_decode_String(deserializer);
+    return SwapMasterKey(
+      xprv: var_xprv,
+      xpub: var_xpub,
+      network: var_network,
+      mnemonic: var_mnemonic,
+      fingerprint: var_fingerprint,
+    );
   }
 
   @protected
@@ -11483,6 +11670,15 @@ class BullSdkApiImpl extends BullSdkApiImplPlatform implements BullSdkApi {
   }
 
   @protected
+  void sse_encode_box_autoadd_swap_master_key(
+    SwapMasterKey self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_swap_master_key(self, serializer);
+  }
+
+  @protected
   void sse_encode_box_autoadd_swap_status_response(
     SwapStatusResponse self,
     SseSerializer serializer,
@@ -11593,10 +11789,10 @@ class BullSdkApiImpl extends BullSdkApiImplPlatform implements BullSdkApi {
     SseSerializer serializer,
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_swap_limits(self.btcLimits, serializer);
-    sse_encode_swap_limits(self.lbtcLimits, serializer);
-    sse_encode_chain_swap_fees(self.btcFees, serializer);
-    sse_encode_chain_swap_fees(self.lbtcFees, serializer);
+    sse_encode_swap_limits(self.lbtcToBtcLimits, serializer);
+    sse_encode_swap_limits(self.btcToLbtcLimits, serializer);
+    sse_encode_chain_swap_fees(self.lbtcToBtcFees, serializer);
+    sse_encode_chain_swap_fees(self.btcToLbtcFees, serializer);
   }
 
   @protected
@@ -11805,6 +12001,42 @@ class BullSdkApiImpl extends BullSdkApiImplPlatform implements BullSdkApi {
     sse_encode_i_32(self.length, serializer);
     for (final item in self) {
       sse_encode_balance(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_list_btc_ln_swap(
+    List<BtcLnSwap> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_btc_ln_swap(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_list_chain_swap(
+    List<ChainSwap> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_chain_swap(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_list_lbtc_ln_swap(
+    List<LbtcLnSwap> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_lbtc_ln_swap(item, serializer);
     }
   }
 
@@ -12277,6 +12509,21 @@ class BullSdkApiImpl extends BullSdkApiImplPlatform implements BullSdkApi {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_u_64(self.minimal, serializer);
     sse_encode_u_64(self.maximal, serializer);
+    sse_encode_opt_box_autoadd_u_64(self.maximalZeroConf, serializer);
+    sse_encode_opt_box_autoadd_u_64(self.minimalBatched, serializer);
+  }
+
+  @protected
+  void sse_encode_swap_master_key(
+    SwapMasterKey self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_String(self.xprv, serializer);
+    sse_encode_String(self.xpub, serializer);
+    sse_encode_network(self.network, serializer);
+    sse_encode_String(self.mnemonic, serializer);
+    sse_encode_String(self.fingerprint, serializer);
   }
 
   @protected
