@@ -54,7 +54,7 @@ abstract class Wallet implements RustOpaqueInterface {
     required BigInt sats,
     required String outAddress,
     required String asset,
-    required Network network,
+    required LiquidNetwork network,
     String? baseUrl,
     required bool isSendAll,
   });
@@ -67,7 +67,7 @@ abstract class Wallet implements RustOpaqueInterface {
 
   /// Initializes a wallet from a specific db path and descriptor
   static Future<Wallet> init({
-    required Network network,
+    required LiquidNetwork network,
     required String dbpath,
     required Descriptor descriptor,
   }) => BullSdk.instance.api.lwkApiWalletWalletInit(
@@ -78,14 +78,14 @@ abstract class Wallet implements RustOpaqueInterface {
 
   /// Sign a wallet transaction, returns (pset, signed_bytes)
   Future<String> signTx({
-    required Network network,
+    required LiquidNetwork network,
     required String pset,
     required String mnemonic,
   });
 
   /// Sign a pset with extra details (used for asset transactions)
   Future<String> signedPsetWithExtraDetails({
-    required Network network,
+    required LiquidNetwork network,
     required String pset,
     required String mnemonic,
   });

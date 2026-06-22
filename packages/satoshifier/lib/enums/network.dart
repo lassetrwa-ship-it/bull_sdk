@@ -46,11 +46,11 @@ enum Network {
     }
   }
 
-  static Network fromLwkNetwork(lwk.Network lwkNetwork) {
+  static Network fromLwkNetwork(lwk.LiquidNetwork lwkNetwork) {
     switch (lwkNetwork) {
-      case lwk.Network.mainnet:
+      case lwk.LiquidNetwork.mainnet:
         return Network.liquidMainnet;
-      case lwk.Network.testnet:
+      case lwk.LiquidNetwork.testnet:
         return Network.liquidTestnet;
     }
   }
