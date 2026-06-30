@@ -37,11 +37,11 @@ packages:
     dependency: transitive
     description:
       path: "."
-      ref: "6ddecbb360fb894068bdfd79ab0c10abf49b9fca"
-      resolved-ref: "6ddecbb360fb894068bdfd79ab0c10abf49b9fca"
-      url: "https://github.com/i5hi/bdk-dart"
+      ref: "1377091a42743761be71ff42e01b8ff65531fbd3"
+      resolved-ref: "1377091a42743761be71ff42e01b8ff65531fbd3"
+      url: "https://github.com/bitcoindevkit/bdk-dart"
     source: git
-    version: "2.3.0-alpha.0"
+    version: "1.0.0-rc.2"
   bip21_uri:
     dependency: transitive
     description:
@@ -747,5 +747,5 @@ packages:
     source: hosted
     version: "3.1.3"
 sdks:
-  dart: "3.12.1"
-  flutter: ">=3.44.1"
+  dart: "3.12.2"
+  flutter: ">=3.44.2"
