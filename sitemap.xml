@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    <url>
+        <loc>https://bullsdk.dev/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/architecture/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/architecture/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/architecture/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/architecture/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/architecture/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/api-reference/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/api-reference/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/api-reference/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/api-reference/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/api-reference/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/api-reference/ark/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/api-reference/ark/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/api-reference/ark/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/api-reference/ark/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/api-reference/ark/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/api-reference/bbqr/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/api-reference/bbqr/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/api-reference/bbqr/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/api-reference/bbqr/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/api-reference/bbqr/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/api-reference/bitbox/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/api-reference/bitbox/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/api-reference/bitbox/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/api-reference/bitbox/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/api-reference/bitbox/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/api-reference/boltz/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/api-reference/boltz/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/api-reference/boltz/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/api-reference/boltz/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/api-reference/boltz/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/api-reference/lwk/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/api-reference/lwk/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/api-reference/lwk/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/api-reference/lwk/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/api-reference/lwk/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/development/frb-codegen/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/development/frb-codegen/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/development/frb-codegen/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/development/frb-codegen/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/development/frb-codegen/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/development/troubleshooting/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/development/troubleshooting/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/development/troubleshooting/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/development/troubleshooting/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/development/troubleshooting/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/getting-started/installation/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/getting-started/installation/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/getting-started/installation/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/getting-started/installation/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/getting-started/installation/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/getting-started/quickstart/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/getting-started/quickstart/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/getting-started/quickstart/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/getting-started/quickstart/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/getting-started/quickstart/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/es/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/es/architecture/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/architecture/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/architecture/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/architecture/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/architecture/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/es/api-reference/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/api-reference/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/api-reference/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/api-reference/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/api-reference/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/es/api-reference/ark/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/api-reference/ark/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/api-reference/ark/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/api-reference/ark/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/api-reference/ark/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/es/api-reference/bbqr/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/api-reference/bbqr/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/api-reference/bbqr/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/api-reference/bbqr/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/api-reference/bbqr/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/es/api-reference/bitbox/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/api-reference/bitbox/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/api-reference/bitbox/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/api-reference/bitbox/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/api-reference/bitbox/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/es/api-reference/boltz/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/api-reference/boltz/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/api-reference/boltz/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/api-reference/boltz/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/api-reference/boltz/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/es/api-reference/lwk/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/api-reference/lwk/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/api-reference/lwk/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/api-reference/lwk/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/api-reference/lwk/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/es/development/frb-codegen/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/development/frb-codegen/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/development/frb-codegen/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/development/frb-codegen/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/development/frb-codegen/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/es/development/troubleshooting/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/development/troubleshooting/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/development/troubleshooting/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/development/troubleshooting/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/development/troubleshooting/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/es/getting-started/installation/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/getting-started/installation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/getting-started/installation/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/getting-started/installation/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/getting-started/installation/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/es/getting-started/quickstart/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/getting-started/quickstart/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/getting-started/quickstart/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/getting-started/quickstart/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/getting-started/quickstart/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/it/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/it/architecture/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/architecture/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/architecture/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/architecture/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/architecture/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/it/api-reference/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/api-reference/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/api-reference/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/api-reference/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/api-reference/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/it/api-reference/ark/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/api-reference/ark/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/api-reference/ark/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/api-reference/ark/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/api-reference/ark/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/it/api-reference/bbqr/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/api-reference/bbqr/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/api-reference/bbqr/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/api-reference/bbqr/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/api-reference/bbqr/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/it/api-reference/bitbox/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/api-reference/bitbox/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/api-reference/bitbox/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/api-reference/bitbox/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/api-reference/bitbox/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/it/api-reference/boltz/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/api-reference/boltz/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/api-reference/boltz/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/api-reference/boltz/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/api-reference/boltz/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/it/api-reference/lwk/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/api-reference/lwk/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/api-reference/lwk/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/api-reference/lwk/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/api-reference/lwk/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/it/development/frb-codegen/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/development/frb-codegen/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/development/frb-codegen/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/development/frb-codegen/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/development/frb-codegen/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/it/development/troubleshooting/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/development/troubleshooting/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/development/troubleshooting/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/development/troubleshooting/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/development/troubleshooting/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/it/getting-started/installation/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/getting-started/installation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/getting-started/installation/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/getting-started/installation/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/getting-started/installation/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/it/getting-started/quickstart/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/getting-started/quickstart/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/getting-started/quickstart/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/getting-started/quickstart/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/getting-started/quickstart/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/pt/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/pt/architecture/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/architecture/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/architecture/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/architecture/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/architecture/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/pt/api-reference/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/api-reference/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/api-reference/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/api-reference/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/api-reference/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/pt/api-reference/ark/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/api-reference/ark/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/api-reference/ark/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/api-reference/ark/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/api-reference/ark/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/pt/api-reference/bbqr/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/api-reference/bbqr/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/api-reference/bbqr/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/api-reference/bbqr/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/api-reference/bbqr/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/pt/api-reference/bitbox/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/api-reference/bitbox/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/api-reference/bitbox/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/api-reference/bitbox/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/api-reference/bitbox/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/pt/api-reference/boltz/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/api-reference/boltz/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/api-reference/boltz/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/api-reference/boltz/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/api-reference/boltz/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/pt/api-reference/lwk/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/api-reference/lwk/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/api-reference/lwk/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/api-reference/lwk/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/api-reference/lwk/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/pt/development/frb-codegen/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/development/frb-codegen/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/development/frb-codegen/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/development/frb-codegen/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/development/frb-codegen/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/pt/development/troubleshooting/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/development/troubleshooting/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/development/troubleshooting/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/development/troubleshooting/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/development/troubleshooting/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/pt/getting-started/installation/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/getting-started/installation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/getting-started/installation/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/getting-started/installation/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/getting-started/installation/"/>
+    </url>
+    <url>
+        <loc>https://bullsdk.dev/pt/getting-started/quickstart/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://bullsdk.dev/pt/getting-started/quickstart/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://bullsdk.dev/getting-started/quickstart/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://bullsdk.dev/es/getting-started/quickstart/"/>
+        <xhtml:link rel="alternate" hreflang="it" href="https://bullsdk.dev/it/getting-started/quickstart/"/>
+    </url>
+</urlset>
